@@ -41,9 +41,18 @@ namespace Vidly
 
            
             services.AddIdentity<ApplicationUser,IdentityRole>()
-                .AddEntityFrameworkStores<DataContext>();
+                .AddEntityFrameworkStores<DataContext>()
+                .AddDefaultTokenProviders();
             services.AddTransient<IEmailSender, EmailSender>();
+
+
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+        }
+
+        private void AddDefaultTokenProviders()
+        {
+            throw new NotImplementedException();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
