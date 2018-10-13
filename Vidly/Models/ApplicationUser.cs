@@ -5,7 +5,7 @@ using Vidly.Models;
 
 namespace Vidly.Models
 {
-    public class ApplicationUser:IdentityUser
+    public class ApplicationUser:IdentityUser<Guid>
     {
 
     }

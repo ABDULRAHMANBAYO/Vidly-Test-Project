@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Vidly.Models;
 using Microsoft.EntityFrameworkCore;
 using Vidly.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 
 
@@ -58,6 +59,7 @@ namespace Vidly.Controllers
 		}
 
 		// GET: /<controller>/
+        //[Authorize] 
 		public IActionResult Index()
 		{
 			

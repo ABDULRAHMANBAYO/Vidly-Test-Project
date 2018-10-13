@@ -10,7 +10,7 @@ using MySql.Data.MySqlClient;
 
 namespace Vidly.Models
 {
-    public class DataContext : IdentityDbContext<ApplicationUser>
+    public class DataContext : IdentityDbContext<ApplicationUser,ApplicationRole,Guid>
     {
 		public DataContext()
 		{

@@ -15,6 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Vidly.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Vidly.Areas.Identity.Services;
+using Microsoft.AspNetCore.Authentication.Google;
+
 
 namespace Vidly
 {
@@ -40,9 +42,15 @@ namespace Vidly
             DataContext dataContext = services.BuildServiceProvider().GetRequiredService<DataContext>();
 
            
-            services.AddIdentity<ApplicationUser,IdentityRole>()
+            services.AddIdentity<ApplicationUser,ApplicationRole>()
                 .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+
+                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            });
             services.AddTransient<IEmailSender, EmailSender>();
 
 
@@ -73,7 +81,6 @@ namespace Vidly
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
