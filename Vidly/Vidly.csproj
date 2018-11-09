@@ -2,28 +2,38 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+        <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
     <UserSecretsId>aspnet-Vidly-716B115C-4CF5-4F1D-A27D-C0BE8AFE089D</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Data\Migrations\20181004190110_ exit.cs" />
     <Compile Remove="Data\Migrations\20181004190110_ exit.Designer.cs" />
+    <Compile Remove="Models\ApplicationRole.cs" />
+    <Compile Remove="Areas\Identity\Services\AuthMessageSenderOptions.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="jQuery.Validation" Version="1.17.0" />
+    <PackageReference Include="jQuery.Validation.Unobtrusive" Version="2.0.20710" />
+    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation" Version="3.2.11" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" PrivateAssets="All" />
     <PackageReference Include="MySql.Data" Version="8.0.12" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.2" />
     <PackageReference Include="bootstrap" Version="4.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="2.1.2" />
-    <PackageReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
+    <PackageReference Include="MailKit" Version="2.0.7" />
+    <PackageReference Include="Glimpse.Mvc5" Version="1.5.3" />
+    <PackageReference Include="Glimpse.EF6" Version="1.6.5" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Controllers\Api\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Views\Accounts\" />
+    <Folder Include="Views\Manage\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +42,15 @@
     <Content Remove="Views\Movies\Details.cshtml" />
     <Content Remove="Views\Movies\Index.cshtml" />
     <Content Remove="Views\Movies\MovieForm.cshtml" />
+    <Content Remove="Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml" />
+    <Content Remove="Areas\Identity\Pages\Account\Manage\Index.cshtml" />
+    <Content Remove="Areas\Identity\Pages\Account\Manage\PersonalData.cshtml" />
+    <Content Remove="Areas\Identity\Pages\Account\Manage\ResetAuthenticator.cshtml" />
+    <Content Remove="Areas\Identity\Pages\Account\Manage\SetPassword.cshtml" />
+    <Content Remove="Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml" />
+    <Content Remove="Areas\Identity\Pages\Account\ExternalLogin.cshtml" />
+    <Content Remove="Areas\Identity\Pages\Account\ForgotPassword.cshtml" />
+    <Content Remove="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\Customers\CustomerForm.cshtml" />

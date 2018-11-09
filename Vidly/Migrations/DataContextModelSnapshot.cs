@@ -157,6 +157,10 @@ namespace Vidly.Migrations
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<string>("SocialNumber")
+                        .IsRequired()
+                        .HasMaxLength(15);
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")

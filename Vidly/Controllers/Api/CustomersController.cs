@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Vidly.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -47,6 +48,7 @@ namespace Vidly.Controllers.Api
 
         // POST api/values
         [HttpPost]
+        [Authorize(Roles=RoleName.Admin)]
         public IActionResult Create([FromBody]Customer customer)
         {
 			if (!ModelState.IsValid)
@@ -62,6 +64,7 @@ namespace Vidly.Controllers.Api
 
         // PUT api/values/5
         [HttpPut("{id}")]
+        [Authorize(Roles=RoleName.Admin)]
         public IActionResult UpdateCustomer(int id,[FromBody] Customer customer)
         {
 			if (!ModelState.IsValid)
@@ -89,6 +92,7 @@ namespace Vidly.Controllers.Api
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
+        [Authorize(Roles=RoleName.Admin)]
         public IActionResult DeleteCustomer(int id)
         {
 		var customerInDb = _context.customers.SingleOrDefault(c => c.Id == id);

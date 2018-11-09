@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using Vidly.Models;
 using Microsoft.EntityFrameworkCore;
 using Vidly.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Vidly.Controllers
-{
+{ 
+    [RequireHttps]
     public class MoviesController : Controller
     {
 		private readonly DataContext _context;//Inquire
@@ -23,6 +25,8 @@ namespace Vidly.Controllers
         {
             _context.Dispose();
         }
+
+        [Authorize(Roles =RoleName.Admin)]
 		public ActionResult New()
         {
 			var genres = _context.Genre.ToList();
@@ -44,7 +48,9 @@ namespace Vidly.Controllers
             return View("MovieForm", viewModel);*/
         }
 
+
         [HttpPost]
+        [Authorize(Roles = RoleName.Admin)]
 		public ActionResult Save(Movie movie) //Model Binding
         {
 			if(!ModelState.IsValid)
@@ -87,10 +93,9 @@ namespace Vidly.Controllers
 
         public IActionResult Index()
         {
-			
-
-            
-			return View();
+            if(User.IsInRole(RoleName.Admin))
+                return View("Index");
+            return View("ViewOnlyIndex");	
         }
 		public IActionResult Details(int id)
         {
@@ -98,11 +103,10 @@ namespace Vidly.Controllers
 			var movie = _context.movies.Include(c => c.Genre).SingleOrDefault(c => c.Id == id);
           
 			return View(movie);
-      
+           }
 
-        }
-
-		public IActionResult Edit(int id)
+        [Authorize(Roles = RoleName.Admin)]
+        public IActionResult Edit(int id)
         {
 			var movie = _context.movies.SingleOrDefault(c => c.Id == id);
 

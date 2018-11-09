@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Vidly.Models;
 
 namespace Vidly.Controllers
-{
+{    [RequireHttps]
     public class HomeController : Controller
     {
         public IActionResult Index()

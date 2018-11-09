@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Vidly.Models.Movie>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Movies</h1>
+
+
+
+<BR><br />
+
+<table id="movies" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Movies</th>
+            <th>Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+        
+    
+</table>
+
+  
+@section scripts
+    {
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script>$(document).ready(function() {
+        var table = $("#movies").DataTable({ 
+            ajax: {
+                    url:"/api/movies",
+                    dataSrc: ""
+            },
+            columns: [
+                {
+                 data: "name",
+                 
+        },
+        {
+            data: "genre.name"
+        },
+        
+        ]
+        });
+        
+});</script>
+}
+
+

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Vidly.Controllers
 {
+    [RequireHttps]
     public class CustomersController : Controller
 	{
         
@@ -27,7 +28,7 @@ namespace Vidly.Controllers
 			_context.Dispose();
 		}
         
-        
+        [Authorize(Roles=RoleName.Admin)]
 		public ActionResult New()
 		{
 			var membershipTypes = _context.MembershipType.ToList();
@@ -42,6 +43,7 @@ namespace Vidly.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles=RoleName.Admin)]
 		public ActionResult Save(Customer customer) //Model Binding
 		{
 			if (!ModelState.IsValid)
@@ -61,13 +63,11 @@ namespace Vidly.Controllers
 		// GET: /<controller>/
         //[Authorize] 
 		public IActionResult Index()
-		{
-			
-			return View();
-
-          
+		{  
+			if(User.IsInRole(RoleName.Admin))
+				return View("Index");
+			return View("ViewOnlyIndex");
 		}
-
 		public IActionResult Details(int id)
 		{
 
@@ -78,7 +78,7 @@ namespace Vidly.Controllers
 			//return View(customer1);
                
 		}
-
+		[Authorize(Roles=RoleName.Admin)]
 		public IActionResult Edit(int id)
 		{
 			var customer = _context.customers.SingleOrDefault(c => c.Id == id);

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Vidly.Models;
@@ -25,6 +26,7 @@ namespace Vidly.Controllers.Api
         }
         // GET: api/values
         [HttpGet]
+
         public IEnumerable<Movie> GetMovies()
 
         {
@@ -48,6 +50,7 @@ namespace Vidly.Controllers.Api
 
         // POST api/values
         [HttpPost]
+        [Authorize(Roles=RoleName.Admin)]
         public IActionResult CreateMovie([FromBody]Movie movie)
         {
             if (!ModelState.IsValid)
@@ -63,6 +66,7 @@ namespace Vidly.Controllers.Api
 
         // PUT api/values/5
         [HttpPut("{id}")]
+        [Authorize(Roles=RoleName.Admin)]
         public IActionResult UpdateMovie(int id, [FromBody]Movie movie)
         {
             if (!ModelState.IsValid)
@@ -90,6 +94,7 @@ namespace Vidly.Controllers.Api
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
+        [Authorize(Roles=RoleName.Admin)]
         public IActionResult DeleteMovie(int id)
         {
             var movieInDb = _context.movies.Single(c => c.Id ==id);
