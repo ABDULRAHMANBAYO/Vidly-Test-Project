@@ -81,13 +81,13 @@ namespace Vidly.Controllers.Api
             {
                 return BadRequest();   
             }
-                
+             
 
             movieInDb.Name = movie.Name;
             movieInDb.ReleaseDate = movie.ReleaseDate;
             movieInDb.GenreId = movie.GenreId;
             movieInDb.NumberInStock = movie.NumberInStock;
-
+            
             _context.SaveChanges();
             return NoContent();
         }

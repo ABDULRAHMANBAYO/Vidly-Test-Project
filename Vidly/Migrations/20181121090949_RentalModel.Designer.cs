@@ -9,8 +9,8 @@ using Vidly.Models;
 namespace Vidly.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181103194457_SocialNumber")]
-    partial class SocialNumber
+    [Migration("20181121090949_RentalModel")]
+    partial class RentalModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -159,6 +159,10 @@ namespace Vidly.Migrations
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<string>("SocialNumber")
+                        .IsRequired()
+                        .HasMaxLength(15);
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
@@ -240,6 +244,8 @@ namespace Vidly.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
+                    b.Property<int>("NumberAvailable");
+
                     b.Property<int>("NumberInStock");
 
                     b.Property<DateTime>("ReleaseDate");
@@ -249,6 +255,28 @@ namespace Vidly.Migrations
                     b.HasIndex("GenreId");
 
                     b.ToTable("movies");
+                });
+
+            modelBuilder.Entity("Vidly.Models.Rental", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CustomerId");
+
+                    b.Property<DateTime>("DateRented");
+
+                    b.Property<DateTime?>("DateReturned");
+
+                    b.Property<int>("MovieId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("Rental");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -309,6 +337,19 @@ namespace Vidly.Migrations
                     b.HasOne("Vidly.Models.Genre", "Genre")
                         .WithMany()
                         .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Vidly.Models.Rental", b =>
+                {
+                    b.HasOne("Vidly.Models.Customer", "Customers")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Vidly.Models.Movie", "Movies")
+                        .WithMany()
+                        .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

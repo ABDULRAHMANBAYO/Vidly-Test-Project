@@ -9,8 +9,8 @@ using Vidly.Models;
 namespace Vidly.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181104145957_ToaddSocialNumberTo")]
-    partial class ToaddSocialNumberTo
+    [Migration("20181121085941_Rental")]
+    partial class Rental
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -159,6 +159,10 @@ namespace Vidly.Migrations
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<string>("SocialNumber")
+                        .IsRequired()
+                        .HasMaxLength(15);
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
@@ -240,6 +244,8 @@ namespace Vidly.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
+                    b.Property<int>("NumberAvailable");
+
                     b.Property<int>("NumberInStock");
 
                     b.Property<DateTime>("ReleaseDate");
@@ -249,6 +255,24 @@ namespace Vidly.Migrations
                     b.HasIndex("GenreId");
 
                     b.ToTable("movies");
+                });
+
+            modelBuilder.Entity("Vidly.Models.Rental", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CustomerId");
+
+                    b.Property<DateTime>("DateRented");
+
+                    b.Property<DateTime?>("DateReturned");
+
+                    b.Property<int>("MovieId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Rental");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

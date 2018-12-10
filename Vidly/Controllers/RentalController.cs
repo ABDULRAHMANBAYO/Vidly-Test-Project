@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Vidly.Models;
 using Microsoft.EntityFrameworkCore;
@@ -12,14 +12,12 @@ using Microsoft.AspNetCore.Authorization;
 namespace Vidly.Controllers
 {
     [RequireHttps]
-	//[ApiController]
-	//[Route("api/[controller]")]
-    public class CustomersController : Controller
+    public class RentalController : Controller
 	{
         
 		private readonly DataContext _context;//Inquire
 
-		public CustomersController(DataContext ctx)
+		public RentalController(DataContext ctx)
 		{
 			_context = ctx;
 
@@ -30,21 +28,20 @@ namespace Vidly.Controllers
 			_context.Dispose();
 		}
         
-		//[HttpGet("New")]
-        [Authorize(Roles=RoleName.Admin)]
+        //[Authorize(Roles=RoleName.Admin)]
 		public ActionResult New()
 		{
-			var membershipTypes = _context.MembershipType.ToList();
+			/* var membershipTypes = _context.MembershipType.ToList();
 			var viewModel = new CustomerFormViewModel
 			{
 				Customer = new Customer(),
 				MembershipType = membershipTypes
-			};
+			}; */
 
-			return View("CustomerForm",viewModel); 
+			return View(); 
 		} 
 
-		[HttpPost]
+		/* [HttpPost]
 		[ValidateAntiForgeryToken]
 		[Authorize(Roles=RoleName.Admin)]
 		public ActionResult Save(Customer customer) //Model Binding
@@ -93,7 +90,7 @@ namespace Vidly.Controllers
 				MembershipType = _context.MembershipType.ToList()
 			};
 			return View("CustomerForm", viewModel);
-		}
+		} */
 
 
 

@@ -9,8 +9,8 @@ using Vidly.Models;
 namespace Vidly.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181104142343_ToaddSocialNumber")]
-    partial class ToaddSocialNumber
+    [Migration("20181111181229_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -158,6 +158,10 @@ namespace Vidly.Migrations
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp");
+
+                    b.Property<string>("SocialNumber")
+                        .IsRequired()
+                        .HasMaxLength(15);
 
                     b.Property<bool>("TwoFactorEnabled");
 

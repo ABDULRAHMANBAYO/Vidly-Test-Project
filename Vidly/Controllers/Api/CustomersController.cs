@@ -27,9 +27,10 @@ namespace Vidly.Controllers.Api
         
         // GET: api/values
         [HttpGet]
-		public IEnumerable<Customer> GetCustomers()
+		public IEnumerable<Customer> GetCustomer()
         {
-            return _context.customers.Include(c =>c.MembershipType).ToList();
+           var customer =_context.customers.Include(c =>c.MembershipType).ToList();
+            return (customer);
         }
 
         // GET api/values/5

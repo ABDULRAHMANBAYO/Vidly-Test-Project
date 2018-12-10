@@ -40,9 +40,11 @@ namespace Vidly.Models
 		[Display (Name ="Membership Type")]
 		public byte MembershipTypeId { get; set; }
 
-
-
-	}
+        public static implicit operator Customer(bool v)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
     
 
